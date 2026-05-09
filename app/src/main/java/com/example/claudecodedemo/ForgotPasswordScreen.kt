@@ -7,19 +7,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.claudecodedemo.ui.theme.ClaudeCodeDemoTheme
 
 @Composable
-fun LoginScreen(
-    onLoginClick: (String, String) -> Unit,
-    onForgotPasswordClick: () -> Unit = {},
+fun ForgotPasswordScreen(
+    onResetPasswordClick: (String, String) -> Unit,
+    onBackToLoginClick: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
 
     Column(
         modifier = modifier
@@ -29,7 +28,7 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Login",
+            text = "Reset Password",
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 32.dp)
         )
@@ -45,44 +44,43 @@ fun LoginScreen(
         )
 
         OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            value = username,
+            onValueChange = { username = it },
+            label = { Text("Username") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 24.dp)
         )
 
         Button(
-            onClick = { onLoginClick(email, password) },
+            onClick = { onResetPasswordClick(email, username) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
         ) {
-            Text("Login")
+            Text("Reset Password")
         }
 
         TextButton(
-            onClick = { onForgotPasswordClick() },
+            onClick = { onBackToLoginClick() },
             modifier = Modifier.padding(top = 8.dp)
         ) {
-            Text("Forgot Password?")
+            Text("Back to Login")
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
+fun ForgotPasswordScreenPreview() {
     ClaudeCodeDemoTheme {
-        LoginScreen(
-            onLoginClick = { email, password ->
-                // Handle login logic
+        ForgotPasswordScreen(
+            onResetPasswordClick = { email, username ->
+                // Handle reset password logic
             },
-            onForgotPasswordClick = {
-                // Handle forgot password click
+            onBackToLoginClick = {
+                // Handle back to login
             }
         )
     }
