@@ -14,6 +14,7 @@ import com.example.claudecodedemo.ui.theme.ClaudeCodeDemoTheme
 @Composable
 fun ForgotPasswordScreen(
     onResetPasswordClick: (String, String) -> Unit,
+    onBackToLoginClick: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     var email by remember { mutableStateOf("") }
@@ -60,6 +61,13 @@ fun ForgotPasswordScreen(
         ) {
             Text("Reset Password")
         }
+
+        TextButton(
+            onClick = { onBackToLoginClick() },
+            modifier = Modifier.padding(top = 8.dp)
+        ) {
+            Text("Back to Login")
+        }
     }
 }
 
@@ -70,6 +78,9 @@ fun ForgotPasswordScreenPreview() {
         ForgotPasswordScreen(
             onResetPasswordClick = { email, username ->
                 // Handle reset password logic
+            },
+            onBackToLoginClick = {
+                // Handle back to login
             }
         )
     }

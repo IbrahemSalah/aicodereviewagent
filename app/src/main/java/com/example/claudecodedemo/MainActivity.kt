@@ -40,6 +40,9 @@ class MainActivity : ComponentActivity() {
                                     currentScreen = "login"
                                 }
                             },
+                            onBackToLoginClick = {
+                                currentScreen = "login"
+                            },
                             modifier = Modifier.padding(innerPadding)
                         )
                     }
@@ -59,12 +62,12 @@ class MainActivity : ComponentActivity() {
 
     private fun handleResetPassword(email: String, username: String): Boolean {
         // Simple validation
-        if (email.isNotBlank() && username.isNotBlank()) {
+        return if (email.isNotBlank() && username.isNotBlank()) {
             Toast.makeText(this, "Password reset link sent!", Toast.LENGTH_SHORT).show()
-            return true
+            true
         } else {
             Toast.makeText(this, "Please enter email and username", Toast.LENGTH_SHORT).show()
-            return false
+            false
         }
     }
 }
